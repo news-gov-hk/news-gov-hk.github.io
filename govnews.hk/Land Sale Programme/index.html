@@ -10,9 +10,47 @@
 	<link rel="stylesheet" href="style.css" />
 	<style>
 		
+		body{
+			/* background-color: #ADD8E6; */
+			transition: background-color 500ms linear;
+
+		}
+		body.add-background {
+			background-color: #ADD8E6;
+			transition: background-color 500ms linear;
+		}
+
+
+		#intro {
+			max-width: 40rem;
+			margin: 1rem auto;
+			text-align: center;
+			padding-top: 320px;
+			padding-bottom: 320px;
+		}
+		
+		#outro {
+			max-width: 40rem;
+			margin: 1rem auto;
+			text-align: center;
+			padding-top: 620px;
+			padding-bottom: 320px;
+			position: relative;
+			/* background-color: white; */
+		}
+
+		.intro__hed {
+			font-size: 2em;
+			margin: 2rem auto 0.5rem auto;
+		}
+
+		.intro__dek {
+		color: #8a8a8a;
+		}
+
 		#scrolly {
 			position: relative;
-			background-color: #f3f3f3;
+			/* background-color: #f3f3f3; */
 			/* padding: 1rem; */
 		}
 
@@ -32,7 +70,6 @@
 			-webkit-transform: translate3d(0, 0, 0);
 			-moz-transform: translate3d(0, 0, 0);
 			transform: translate3d(0, 0, 0);
-			background-color: #8a8a8a;
 			z-index: 0;
 		}
 
@@ -54,6 +91,7 @@
 			margin: 0 auto 2rem auto;
 			color: #fff;
 			background-color: rgba(0, 0, 0, 0.1);
+
 		}
 
 		.step:last-child {
@@ -63,6 +101,8 @@
 		.step.is-active p {
 			background-color: goldenrod;
 			color: #3b3b3b;
+			transition: background-color 500ms linear;
+
 		}
 
 		.step p {
@@ -74,6 +114,8 @@
 
 		path.is-active {
 			fill: goldenrod;
+			transition: fill 500ms linear;
+
 		}
 	</style>
 </head>
@@ -96,19 +138,16 @@
 				<a href="https://russellsamora.github.io/scrollama/mobile-pattern">Mobile Pattern</a>
 			</div>
 		</nav> -->
-		<!-- <section id="intro">
-			<h1 class="intro__hed">Sticky Overlay Example</h1>
+		<section id="intro">
+			<h1 class="intro__hed">2025至26年度賣地表</h1>
 			<p class="intro__dek">
-				Start scrolling to see how it works.
-			</p>
-		</section> -->
-
-		<section id="intro">政府公布2025至26年度賣地表，有八幅住宅用地，每幅用地的規模均少於1,000個單位，預計合共提供約4,450個單位</section>
+				政府公布2025至26年度賣地表，有八幅住宅用地，每幅用地的規模均少於1,000個單位，預計合共提供約4,450個單位			</p>
+		</section>
 
 		<section id="scrolly">
 			<figure>
 				<svg id="g-hong-kong_svg-Artboard_1-interactions-img" xmlns="http://www.w3.org/2000/svg" baseProfile="tiny" version="1.2" viewBox="0 0 612.522 444.197">
-					<rect id="sea" width="612.522" height="444.197" fill="#ADD8E6"/>
+					<rect id="sea" width="612.522" height="444.197" fill="none"/>
 					<path id="NT-KT" d="M315.822,235.697l-.63,1.79,1.05.95-2.55,2.28-2.13-1.37-2.55,1.37-1.27-.91-4.25-.91-1.7,2.28-1.27-.46-1.28.46.86,1.83,3.82.91.19,3.52,4.48,1.05.22,3.34-1.14,2.69-8.59,7.44,2.06,3.72h0l-1.46.9h-3.08l-6.73-5.12,1.13-3.62,1.96.6,10.1-3.61-.28-1.81-1.69-.3-5.04,1.81-1.96-.9-1.68-7.84,4.77-1.2-.29-1.51-1.4-.3-3.93,1.51-.55-3.31-3.09-7.84-.84-.3-1.4,1.21-3.09-2.71.29-7.23-1.69-3.32-1.4.6v-1.2h-.56l.56-2.27h0l.38-.11h0l.2.02h0l7.85-4.03,4.25-6.85,12.15-.91-.26-5.03,1.28-2.74-.42-1.37-1.7-.46v-1.37l8.93-2.28.85.91-1.22,2.12.38,2.9,2.97.46,2.13-1.37h0v2.74l-1.28,1.37-2.55.46-.85,2.29,2.55,3.2-2.13,1.37-.85,2.28,1.7,4.11-.43,1.37-1.69.91-2.55,3.65.85,9.14,2.97,1.37v1.37l2.52,2.26h0ZM268.562,215.357l4.2.6,3.93,2.41-.29,6.03,1.96,3.01-.28,1.81,1.4,2.11,1.4.6-1.12,4.82.28,1.2,1.96,1.51-.55,2.41,1.4,2.71-1.69,2.71.56,2.11-1.13.3-.84,3.31-1.96,1.21-.84,3.32h-1.68l-2.25-3.01h-1.96l-.84,1.2h-1.12l-1.96-.9-.84-2.11h-2.25l-.84.9.28,3.01-3.36.3-3.65-5.12,1.13-4.52,1.4-1.81-.56-1.51-.84.9-.56-.3.28-1.2h.85v-.61l-1.12.3v-3.92l1.68-.3-1.4-.9-4.2-.6-1.12-1.81v-2.71h-2.25l-.84-2.41v-2.11l.84-1.51-1.12-3.32-1.4-1.51.28-1.21,4.49-2.71,2.52-.3.85-2.11,1.96.3.56,2.11,1.69.3,3.08-2.11h3.37l.84-.9h1.67v.03h0Z" fill="#4DB0B9" stroke="#fff" stroke-linecap="round" stroke-miterlimit="10"/>
 					<path id="KL-WTS" d="M392.302,248.027l-8.92,1.37-2.97-2.74-2.13.92-4.25-.46h0l-.85-.91-2.55-.46-6.8,4.57-2.97-2.29-1.7-.45-1.28,1.37h-1.7v-2.29l-1.27-.45v-3.66l-2.55-1.37.85-4.11-1.7-1.37h-1.27v-1.83l-1.7-2.28h0l3.82-1.83,2.98.92,5.01-.92-.34-2.74.85-.91h1.7l1.27,1.82,2.55-.45,2.13-3.66,1.27.92,6.8-.46,1.7-.92,1.27.46,2.56-.46.42-1.82h2.13l2.12-1.37h3.82l-.29,8.38,2.35,15.34-.36,4.14h0Z" fill="#4DB0B9" stroke="#fff" stroke-linecap="round" stroke-miterlimit="10"/>
 					<path id="NT-TW" d="M280.352,217.807l.26-1.55-.84-2.42-1.96-1.51-.84-2.1-3.93-2.71h-1.68l-3.37,1.81-.84,1.2-3.93.3v.6l-2.8.3-.84.9h-2.25l-.84,1.21-5.61-3.32-4.77-.6-5.04,2.71-1.69,1.81-.28,1.51-3.09.6-3.37-.6-1.69-2.11-3.63.3-1.69-.6-.84,1.21h-1.68l-2.25,2.41-3.08.6-1.12,2.12-5.88-.91-.85.91h-1.12l-1.4,2.11-.56-.3-.56,1.5-3.64-.3-1.42,1.21-3.06.6v.62l-3.33-.62h0l-1.15-.82.15-3.7,3.83-2.74,3.82-5.02,3.4-.46,1.27-.91.43-1.37-.43-1.37-3.82.92-1.28-.92-1.27-4.11-2.13-.46v-3.66l1.7-.91,1.7.91,1.28-.46,3.4-4.11,5.1,2.74h2.56l-.85-4.57,1.7-2.74,6.8,2.28,1.7-1.83,5.94.46,2.13-.46v-2.74l1.28-2.29h0l4.67-3.2,1.69-.46,1.28.91,2.55-4.57,1.27.46,3.4-.46,4.25-4.57,1.69-.92,2.55.46,2.56,1.83h2.12l5.11-4.11,2.55-3.65,3.82-.46,1.28.91.42,1.37h1.28l1.27-.91,1.7.46,2.55-.92.85-1.83,3.4-2.74,2.13.91h3.4v-1.37l2.55-2.74.42-2.74h0l-.07,1.71,4.37-1.55,16.86.71.52,4.15,8.68.03,2.56.71,3.41-1.53,5.74.6h0l-.42,3.84,1.7,1.83.42,3.2v3.2l-1.7.92.86,5.94-.86,1.37-3.82,2.74-1.28,2.74-2.97,2.29-2.55,3.2-4.67,1.37-2.13,2.29h0l-2.13,1.37-2.97-.46-.38-2.9,1.22-2.12-.85-.91-8.93,2.28v1.37l1.7.46.42,1.37-1.28,2.74.26,5.03-12.15.91-4.25,6.85-7.82,4.04h0ZM203.802,269.587l-42.05-.45h0l2.53-3.16,1.68-3.92,1.4-.3,1.13.9.56-.9,5.88-2.41.84-1.21,2.81-.3-.28-3.01,1.96-.6,1.4-1.51h3.09l1.96-3.61.85.3v1.51l3.37-1.21-1.4-4.22h1.12l1.4,1.21v2.11l-.28,1.51-1.96,1.51v2.11l-1.96,1.51v1.51l3.93-1.51,2.8-3.01v-.9l2.53-3.32,3.92-3.01,1.69-.3,1.96-1.81,1.4-.3,1.12-1.2.56-2.11,1.69-.6.28,1.51,1.68.3.29-.9-.84-1.81,1.12-.6-.28-3.01.56-.6,3.08,1.21,1.4-.3,2.24,1.2,3.65,3.62.28,2.41,2.8,4.52-3.37,1.51.56,3.32,1.69,1.21v.9l-.85,1.51h-.84l-.28,2.71-1.4,2.11,1.96,1.51.28,1.21-2.24-.9-2.8,3.61-4.21-.3-.28,2.11-1.4.6-1.96-.9-.28-1.51-2.53-2.71-.56-3.01-1.4-1.51h-1.68l-.29-.6-2.24.3.84,2.41-.28,1.2h.56l.56,3.62.84.9-.31,3.85h0ZM228.192,223.487l.56,1.81,2.8-1.21,1.4.3-.29,1.2h-1.39v2.71l-1.12.6-.56,1.51.84,1.51,1.69-.3,1.68,2.71v1.2l-7.01,3.32-.84-2.41-1.4-.91v-1.51l-2.25-1.51-.55-1.51,2.8-.3.28-.6.28-3.01-1.68-.6.84-2.11,1.69-.91h2.23v.02h0ZM279.772,217.897l.38-.11h0l-.38.11Z" fill="#4DB0B9" stroke="#fff" stroke-linecap="round" stroke-miterlimit="10"/>
@@ -153,13 +192,19 @@
 			</article>
 		</section>
 
-		<section id="outro">this is an outro</section>
+		<section id="outro">
+			<h1 class="intro__hed">2025至26年度賣地表</h1>
+			<p class="intro__dek">
+				政府公布2025至26年度賣地表，有八幅住宅用地，每幅用地的規模均少於1,000個單位，預計合共提供約4,450個單位			</p>
+		</section>
+
 	</main>
 
 	<script src="d3.min.js"></script>
 	<script src="scrollama.min.js"></script>
 	<script>
 		// using d3 for convenience
+		var body = d3.select("body");
 		var main = d3.select("main");
 		var scrolly = main.select("#scrolly");
 		var figure = scrolly.select("figure");
@@ -177,11 +222,11 @@
 			var stepH = Math.floor(window.innerHeight * 0.5);
 			step.style("height", stepH + "px");
 
-			var figureHeight = window.innerHeight ;
+			var figureHeight = figure.node().getBoundingClientRect().height;
 			var figureMarginTop = (window.innerHeight - figureHeight) / 2;
 
 			figure
-				.style("height", figureHeight + "px")
+				.style("height", window.innerHeight/2 + "px")
 				.style("top", figureMarginTop + "px");
 
 			// 3. tell scrollama to update new element dimensions
@@ -190,8 +235,14 @@
 
 		// scrollama event handlers
 		function handleStepEnter(response) {
-			console.log(response);
 			// response = { element, direction, index }
+			// console.log(response)
+
+			body.classed("add-background", true
+			// function (d, i) {
+			// 	return response.index === 0 || response.index === 1 || response.index === 2|| response.index === 3;
+			// }
+		);
 
 			// add color to current step only
 			step.classed("is-active", function (d, i) {
@@ -202,12 +253,18 @@
 			// figure.select("p").text(response.index + 1);
 
 			NTTM.classed("is-active", function (d, i) {
-				return response.index == 1;
+				return response.index === 1;
 			});
 			
 			NTTW.classed("is-active", function (d, i) {
-				return response.index == 2;
+				return response.index === 2;
 			});
+		}
+		function handleStepExit(response) {
+			// response = { element, direction, index }
+			console.log(response)
+
+			body.classed("add-background", !((response.index === 0 && response.direction === 'up' )|| (response.index === 3 && response.direction === 'down' )) );
 		}
 
 
@@ -225,7 +282,8 @@
 					// offset: 0.33,
 					debug: false
 				})
-				.onStepEnter(handleStepEnter);
+				.onStepEnter(handleStepEnter)
+				.onStepExit(handleStepExit);
 		}
 
 		// kick things off
