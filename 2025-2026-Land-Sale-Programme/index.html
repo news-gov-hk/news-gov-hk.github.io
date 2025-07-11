@@ -139,15 +139,15 @@
 		.step.is-active {
 			opacity: 1;
 		}
-		.step:first-child {
+		/* .step:first-child {
 			opacity: 0;
 			margin: 0;
 			padding: 0;
-			/* trigger map opacity earlier, and keep full hight*/
+			trigger map opacity earlier, and keep full hight
 			height: 50vh;
 			top: -50vh;
 			position: relative;
-		}
+		} */
 		.step:last-child {
 			opacity: 0;
 			height: 50vh;
@@ -907,10 +907,7 @@
 			</figure>
 
 			<article>
-				<div class="step" data-step="0">
-					<p>STEP 1</p>
-					blank
-				</div>
+				<!-- <div class="step" data-step="0" style="height: 4px;">needed to trigger enter, so step 1 can exit when scroll up.</div> -->
 				<div class="step" data-step="1">
 					<p>STEP 1</p>
 					八幅住宅用地中，港島佔兩幅，位於<span class="highlight">赤柱環角道</span>和<span class="highlight">筲箕灣東大街</span>。
@@ -957,45 +954,60 @@
 		var scrolly = main.select("#scrolly");
 		var ai2html = scrolly.select(".ai2html");
 		var article = scrolly.select("article");
-		var step = article.selectAll(".step");
-		var step_1 = main.selectAll( "#step-1,.g-step-1")
-		var step_2 = main.selectAll( "#step-2,.g-step-2")
-		var step_3 = main.selectAll( "#step-3,.g-step-3")
-		var step_4 = main.selectAll( "#step-4,.g-step-4")
-		var step_5 = main.selectAll( "#step-5,.g-step-5")
+		var step_all_text = article.selectAll(".step")
+			.datum(function() {
+				return this.getAttribute("data-step");
+			});
+		var step_1_svg = main.selectAll( "#step-1,.g-step-1")
+		var step_2_svg = main.selectAll( "#step-2,.g-step-2")
+		var step_3_svg = main.selectAll( "#step-3,.g-step-3")
+		var step_4_svg = main.selectAll( "#step-4,.g-step-4")
+		var step_5_svg = main.selectAll( "#step-5,.g-step-5")
 		
 		function init() {
 			scroller
 				.setup({
-					step: "#scrolly article .step",
+					step: "#scrolly, #scrolly article .step",
 					offset: .6,
 					debug: false,
 					progress: true
 				})
 				.onStepEnter((event) => {
 
-					// console.log(event);
-
-					body.classed("add-background", true );
-					ai2html.classed("is-active", true);
-
-					step.classed("is-active",   (d, i) => { return i === event.index; });
-					step_1.classed("is-active", (d, i) => { return event.index === 1; });
-					step_2.classed("is-active", (d, i) => { return event.index === 2; });
-					step_3.classed("is-active", (d, i) => { return event.index === 3; });
-					step_4.classed("is-active", (d, i) => { return event.index === 4; });
-					step_5.classed("is-active", (d, i) => { return event.index === 5; });
+					step_all_text.classed("is-active",   (d, i) => { return d === event.element.dataset.step; });
+					step_1_svg.classed("is-active", (d, i) => { return event.element.dataset.step === '1'; });
+					step_2_svg.classed("is-active", (d, i) => { return event.element.dataset.step === '2'; });
+					step_3_svg.classed("is-active", (d, i) => { return event.element.dataset.step === '3'; });
+					step_4_svg.classed("is-active", (d, i) => { return event.element.dataset.step === '4'; });
+					step_5_svg.classed("is-active", (d, i) => { return event.element.dataset.step === '5'; });
 
 				})
 				.onStepExit((event) => {
-					console.log(event);
-
-					body.classed("add-background", !((event.index === 0 && event.direction === 'up' ) || (event.index === 6 && event.direction === 'down' )) );
-					ai2html.classed("is-active", !((event.index === 0 && event.direction === 'up' ) || (event.index === 6 && event.direction === 'down' )) );
 				})
 				.onStepProgress((event) => {
-					console.log(event);
+					if(event.element.id == 'scrolly') {
+						// console.log(event);
+						body.classed("add-background", event.progress > 0 && event.progress < 1 );
+						ai2html.classed("is-active", event.progress > 0 && event.progress < 1  );
+					}
 				});
+
+			// When using scrollama.js, resizing the browser window can sometimes cause the onStepProgress function to stop working correctly
+			window.addEventListener('resize', debounce(function() {
+				scroller.resize();
+			}, 250));
+			function debounce(func, wait) {
+				let timeout;
+				return function(...args) {
+					const context = this;
+					const later = function() {
+						timeout = null;
+						func.apply(context, args);
+					};
+					clearTimeout(timeout);
+					timeout = setTimeout(later, wait);
+				};
+			}
 		}
 
 		init();
