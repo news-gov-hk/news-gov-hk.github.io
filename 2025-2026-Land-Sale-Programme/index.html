@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang=”zh-hk”>
-
 <head>
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -101,10 +100,15 @@
 			transform: translate3d(0, 0, 0);
 			z-index: 0; */
 		}
-		#g-hong-kong_svg-Artboard_1-interactions-img, .ai2html {
+		.ai2html {
 			align-self: center;
 			flex: 0 0 auto;
 			width: 100%;
+			opacity: 0;
+			transition: opacity 500ms linear;
+		}
+		.ai2html.is-active {
+			opacity: 1;
 		}
 
 		/* figure p {
@@ -137,9 +141,18 @@
 		}
 		.step:first-child {
 			opacity: 0;
+			margin: 0;
+			padding: 0;
+			/* trigger map opacity earlier, and keep full hight*/
+			height: 50vh;
+			top: -50vh;
+			position: relative;
 		}
 		.step:last-child {
 			opacity: 0;
+			height: 50vh;
+			margin: 0;
+			padding: 0;
 			/* margin-bottom: 0; */
 		}
 
@@ -213,7 +226,6 @@
 
 	</style>
 </head>
-
 <body>
 	<main>
 		<a href="https://news.gov.hk" target="_blank" class="github-corner"><img width="80" height="80" viewBox="0 0 250 250"
@@ -226,6 +238,7 @@
 		</section>
 
 		<section id="scrolly">
+
 			<figure>
 
 
@@ -936,133 +949,57 @@
 	<script src="d3.min.js"></script>
 	<script src="scrollama.min.js"></script>
 	<script>
-/*
 
-Data collection:
-DCD source: https://portal.csdi.gov.hk/geoportal/?lang=en&datasetId=had_rcd_1634523272907_75218
-TPU source: https://portal.csdi.gov.hk/geoportal/?lang=en&datasetId=pland_rcd_1637289585582_55577
+		var scroller = scrollama();
 
-// Download
-
-curl 'https://static.csdi.gov.hk/csdi-webpage/download/83cd933a39c7525581d6aa429a981c90/geojson' -o dcd.zip
-unzip dcd.zip
-curl 'https://static.csdi.gov.hk/csdi-webpage/download/b4c06cb8d54255ee860c337b25bfc188/geojson' -o tpu.zip
-unzip tpu.zip
-
-// Process
-
-npx mapshaper -i DCD.json -proj init=EPSG:2326 wgs84 -o DCD_84.json
-npx mapshaper -i TPU.json -proj init=EPSG:2326 wgs84 -o TPU_84.json
-npx mapshaper -i DCD_84.json -clip TPU_84.json -o DCD_clipped.json
-
-npx mapshaper DCD_clipped.json \
--simplify 0.3% \
--style fill="#4DB0B9" stroke="#fff" stroke-width=1 \
--o format=svg id-field=AREA_CODE out.svg
-
-
-////////////
-mapshaper -each 'CentroidX=this.centroidX, CentroidY=this.centroidY'
-mapshaper -simplify 2%
-    //mapshaper -simplify percentage=0.1
-    // -dissolve OBJECTID
-*/
-
-		// using d3 for convenience
 		var body = d3.select("body");
 		var main = d3.select("main");
 		var scrolly = main.select("#scrolly");
-		var figure = scrolly.select("figure");
+		var ai2html = scrolly.select(".ai2html");
 		var article = scrolly.select("article");
 		var step = article.selectAll(".step");
-		
 		var step_1 = main.selectAll( "#step-1,.g-step-1")
 		var step_2 = main.selectAll( "#step-2,.g-step-2")
 		var step_3 = main.selectAll( "#step-3,.g-step-3")
 		var step_4 = main.selectAll( "#step-4,.g-step-4")
 		var step_5 = main.selectAll( "#step-5,.g-step-5")
 		
-		// initialize the scrollama
-		var scroller = scrollama();
-
-		// generic window resize listener event
-		function handleResize() {
-			// console.log("handleResize");
-			// 1. update height of step elements
-			// var stepH = Math.floor(window.innerHeight * 0.5);
-			// step.style("height", stepH + "px");
-
-			// var figureHeight = figure.node().getBoundingClientRect().height;
-			// var figureMarginTop = (window.innerHeight - figureHeight) / 2;
-
-			// figure
-			// 	.style("height", window.innerHeight/2 + "px")
-			// 	.style("top", figureMarginTop + "px");
-
-			// 3. tell scrollama to update new element dimensions
-			scroller.resize();
-		}
-
-		// scrollama event handlers
-		function handleStepEnter(response) {
-			// response = { element, direction, index }
-			// console.log(response)
-
-			body.classed("add-background", true
-			// function (d, i) {
-			// 	return response.index === 0 || response.index === 1 || response.index === 2|| response.index === 3;
-			// }
-		);
-
-			// add color to current step only
-			step.classed("is-active", function (d, i) {
-				return i === response.index;
-			});
-
-			// update graphic based on step
-			// figure.select("p").text(response.index + 1);
-
-			step_1.classed("is-active", function (d, i) { return response.index === 1; });
-			step_2.classed("is-active", function (d, i) { return response.index === 2; });
-			step_3.classed("is-active", function (d, i) { return response.index === 3; });
-			step_4.classed("is-active", function (d, i) { return response.index === 4; });
-			step_5.classed("is-active", function (d, i) { return response.index === 5; });
-
-		}
-		function handleStepExit(response) {
-			// response = { element, direction, index }
-			// console.log(response)
-
-			body.classed("add-background", !((response.index === 0 && response.direction === 'up' ) || (response.index === 6 && response.direction === 'down' )) );
-		}
-
-
 		function init() {
-
-			// 1. force a resize on load to ensure proper dimensions are sent to scrollama
-			handleResize();
-			window.addEventListener('resize', handleResize);
-
-
-			// 2. setup the scroller passing options
-			// 		this will also initialize trigger observations
-			// 3. bind scrollama event handlers (this can be chained like below)
 			scroller
 				.setup({
-					// container: '#scrolly', // our outermost scrollytelling element
-					// graphic: '#scrolly figure', // the graphic
-					// text: '#scrolly article', // the step container
-					// step: '.scroll__text .step', // the step elements
 					step: "#scrolly article .step",
 					offset: .6,
-					debug: false
+					debug: false,
+					progress: true
 				})
-				.onStepEnter(handleStepEnter)
-				.onStepExit(handleStepExit);
+				.onStepEnter((event) => {
+
+					// console.log(event);
+
+					body.classed("add-background", true );
+					ai2html.classed("is-active", true);
+
+					step.classed("is-active",   (d, i) => { return i === event.index; });
+					step_1.classed("is-active", (d, i) => { return event.index === 1; });
+					step_2.classed("is-active", (d, i) => { return event.index === 2; });
+					step_3.classed("is-active", (d, i) => { return event.index === 3; });
+					step_4.classed("is-active", (d, i) => { return event.index === 4; });
+					step_5.classed("is-active", (d, i) => { return event.index === 5; });
+
+				})
+				.onStepExit((event) => {
+					console.log(event);
+
+					body.classed("add-background", !((event.index === 0 && event.direction === 'up' ) || (event.index === 6 && event.direction === 'down' )) );
+					ai2html.classed("is-active", !((event.index === 0 && event.direction === 'up' ) || (event.index === 6 && event.direction === 'down' )) );
+				})
+				.onStepProgress((event) => {
+					console.log(event);
+				});
 		}
 
-		// kick things off
 		init();
+
 	</script>
 </body>
 
