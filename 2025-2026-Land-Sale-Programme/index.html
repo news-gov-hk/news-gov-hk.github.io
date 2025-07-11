@@ -58,6 +58,7 @@
 
 		#scrolly {
 			position: relative;
+			/* padding-bottom: 50vh; */
 			/* background-color: #f3f3f3; */
 			/* padding: 1rem; */
 		}
@@ -68,7 +69,7 @@
 			max-width: 80vw;
 			margin: 0 auto;
 			font-weight: 300;
-
+		    top: -40vh;
 		}
 		@media only screen and (min-width: 1039px) {
 			article {
@@ -105,9 +106,12 @@
 			flex: 0 0 auto;
 			width: 100%;
 			opacity: 0;
+			/* top: 10vh; */
+    		/* position: relative; */
 			transition: opacity 500ms linear;
 		}
 		.ai2html.is-active {
+			/* top: 0; */
 			opacity: 1;
 		}
 
@@ -139,21 +143,18 @@
 		.step.is-active {
 			opacity: 1;
 		}
-		/* .step:first-child {
-			opacity: 0;
-			margin: 0;
-			padding: 0;
-			trigger map opacity earlier, and keep full hight
-			height: 50vh;
-			top: -50vh;
-			position: relative;
+		.step:first-child {
+			margin-top: 0;
+		}
+		/* .step:nth-last-child(2){
+			margin-bottom: 0;
 		} */
 		.step:last-child {
 			opacity: 0;
-			height: 50vh;
+			height: 10vh;
 			margin: 0;
 			padding: 0;
-			/* margin-bottom: 0; */
+			margin-bottom: 0;
 		}
 
 
@@ -237,7 +238,7 @@
 			<p class="intro__dek">政府公布2025至26年度賣地表，有八幅住宅用地，每幅用地的規模均少於1,000個單位，預計合共提供約4,450個單位。</p>
 		</section>
 
-		<section id="scrolly">
+		<section id="scrolly" data-offset="0.5">
 
 			<figure>
 
@@ -983,12 +984,17 @@
 
 				})
 				.onStepExit((event) => {
+					if(event.direction == 'up' && event.element.dataset.step == '1') {
+						step_all_text.classed("is-active", (d, i) => { if(d === '1') return false});
+						step_1_svg.classed("is-active", false);
+
+					}
 				})
 				.onStepProgress((event) => {
 					if(event.element.id == 'scrolly') {
-						// console.log(event);
-						body.classed("add-background", event.progress > 0 && event.progress < 1 );
-						ai2html.classed("is-active", event.progress > 0 && event.progress < 1  );
+						console.log(event);
+						body.classed("add-background", event.progress > 0.01 && event.progress < 1 );
+						ai2html.classed("is-active", event.progress > 0.01 && event.progress < 1  );
 					}
 				});
 
