@@ -30,6 +30,8 @@
 			max-width: 40rem;
 			margin: 0rem 1rem;
 			text-align: center;
+			position: relative;
+			z-index: 1;
 		}
 		
 		#outro {
@@ -123,18 +125,24 @@
 			margin: 0;
 			color: #fff;
 			background-color: #333333cc;
-			/* height: 100vh; */
-			/* border: 1px solid red; */
 			opacity: 0.2;
 			margin: 50vh 0;
 			padding: 20px 40px;
 			border-radius: 10px;
+			line-height: 1.5;
 			transition: opacity 500ms linear;
 		}
-
 		.step.is-active {
 			opacity: 1;
 		}
+		.step:first-child {
+			opacity: 0;
+		}
+		.step:last-child {
+			opacity: 0;
+			/* margin-bottom: 0; */
+		}
+
 
 		.g-step-5,
 		.g-step-4,
@@ -165,10 +173,6 @@
 			opacity: 1;
 		}
 
-		.step:last-child {
-			margin-bottom: 0;
-		}
-
 		/* .step.is-active p {
 			background-color: goldenrod;
 			color: #3b3b3b;
@@ -193,6 +197,19 @@
 		.g-aiPointText {
 			text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;
 		}
+
+		.highlight {
+			background-color: #333333;
+			border-radius: 5px;
+			/* box-decoration-break: clone; */
+			padding: 2px 10px;
+			margin: 0px 5px;
+		}
+		.highlight.golden {
+			background-color: goldenrod;
+		}
+
+		
 
 	</style>
 </head>
@@ -506,11 +523,11 @@
 			<p class="g-pstyle0">佐敦谷彩興路</p>
 		</div>
 		<div id="g-ai0-3" class="g-step-3 g-aiAbs g-aiPointText" style="top:42.7962%;margin-top:-10px;left:53.3792%;margin-left:-53px;width:106px;">
-			<p class="g-pstyle0">荃灣永順街與</p>
+			<p class="g-pstyle0">荃灣永順街與<br/>德士古道交界</p>
 		</div>
-		<div id="g-ai0-4" class="g-step-3 g-aiAbs g-aiPointText" style="top:44.2286%;margin-top:-10px;left:53.3792%;margin-left:-53px;width:106px;">
+		<!-- <div id="g-ai0-4" class="g-step-3 g-aiAbs g-aiPointText" style="top:44.2286%;margin-top:-10px;left:53.3792%;margin-left:-53px;width:106px;">
 			<p class="g-pstyle0">德士古道交界</p>
-		</div>
+		</div> -->
 		<div id="g-ai0-5" class="g-step-2 g-aiAbs g-aiPointText" style="top:49.6896%;margin-top:-10px;left:70.8596%;margin-left:-53px;width:106px;">
 			<p class="g-pstyle0">牛頭角彩霞道</p>
 		</div>
@@ -719,11 +736,11 @@
 			<p class="g-pstyle0">佐敦谷彩興路</p>
 		</div>
 		<div id="g-ai1-3" class="g-step-3 g-aiAbs g-aiPointText" style="top:43.1543%;margin-top:-10px;left:51.9639%;margin-left:-53px;width:106px;">
-			<p class="g-pstyle0">荃灣永順街與</p>
+			<p class="g-pstyle0">荃灣永順街與<br/>德士古道交界</p>
 		</div>
-		<div id="g-ai1-4" class="g-step-3 g-aiAbs g-aiPointText" style="top:44.5867%;margin-top:-10px;left:51.9639%;margin-left:-53px;width:106px;">
+		<!-- <div id="g-ai1-4" class="g-step-3 g-aiAbs g-aiPointText" style="top:44.5867%;margin-top:-10px;left:51.9639%;margin-left:-53px;width:106px;">
 			<p class="g-pstyle0">德士古道交界</p>
-		</div>
+		</div> -->
 		<div id="g-ai1-5" class="g-step-2 g-aiAbs g-aiPointText" style="top:49.242%;margin-top:-10px;left:72.5101%;margin-left:-53px;width:106px;">
 			<p class="g-pstyle0">牛頭角彩霞道</p>
 		</div>
@@ -759,23 +776,23 @@
 				</div>
 				<div class="step" data-step="1">
 					<p>STEP 1</p>
-					八幅住宅用地中，港島佔兩幅，位於赤柱環角道和筲箕灣東大街。
+					八幅住宅用地中，港島佔兩幅，位於<span class="highlight">赤柱環角道</span>和<span class="highlight">筲箕灣東大街</span>。
 				</div>
 				<div class="step" data-step="2">
 					<p>STEP 2</p>
-					九龍佔兩幅，位於佐敦谷彩興路和牛頭角彩霞道
+					九龍佔兩幅，位於<span class="highlight">佐敦谷彩興路</span>和<span class="highlight">牛頭角彩霞道</span>。
 				</div>
 				<div class="step" data-step="3">
 					<p>STEP 3</p>
-					新界佔四幅，分別位於西貢打鼓嶺清水灣道、東涌第106A 區、屯門海珠路和荃灣永順街與德士古道交界。
+					新界佔四幅，分別位於<span class="highlight">西貢打鼓嶺清水灣道</span>、<span class="highlight">東涌第106A 區</span>、<span class="highlight">屯門海珠路</span>和<span class="highlight">荃灣永順街與德士古道交界</span>。
 				</div>
 				<div class="step" data-step="4">
 					<p>STEP 4</p>
-					發展局局長甯漢豪表示，八幅住宅用地中，三幅為本財政年度的滾存用地，
+					發展局局長甯漢豪表示，八幅住宅用地中，三幅為本財政年度的<span class="highlight">滾存用地</span>，
 				</div>
 				<div class="step" data-step="5">
 					<p>STEP 5</p>
-					其餘五幅新增住宅地為已建成的市區地帶用地，分別位於筲箕灣、佐敦谷、牛頭角、屯門、荃灣。
+					其餘五幅<span class="highlight golden">新增住宅地</span>為已建成的市區地帶用地，分別位於筲箕灣、佐敦谷、牛頭角、屯門、荃灣。
 				</div>
 				<div class="step" data-step="6">
 					<p>STEP 1</p>
